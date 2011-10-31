@@ -1,0 +1,33 @@
+[sss]
+nss_passwd=     passwd:         compat sss
+nss_group=      group:          compat sss
+nss_shadow=     shadow:         compat
+nss_netgroup=   netgroup:       nis
+
+pam_auth=       auth    [success=2 default=ignore]  pam_unix.so nullok_secure try_first_pass
+                auth    [success=1 default=ignore]  pam_sss.so use_first_pass forward_pass
+                auth    requisite                   pam_deny.so
+                auth    requisite                   pam_succeed_if.so uid >= 500 quiet
+                auth    required                    pam_group.so
+                auth    required                    pam_permit.so
+                auth    optional                    pam_ecryptfs.so unwrap
+
+pam_account=    account required                                        pam_unix.so
+                account sufficient                                      pam_localuser.so #avoid sssd log message for local users
+                account sufficient                                      pam_succeed_if.so uid < 500 quiet
+                account [default=bad success=ok user_unknown=ignore]    pam_sss.so
+                account required                                        pam_permit.so
+
+pam_password=   password        sufficient      pam_unix.so obscure sha512
+                password        sufficient      pam_sss.so use_authtok
+                password        requisite       pam_deny.so
+                password        required        pam_permit.so
+                password        optional        pam_ecryptfs.so
+
+pam_session=    session required  <% if use_ecryptfs then %>  pam_script.so <% else %>  pam_mkhomedir.so skel=/etc/skel/ umask=0077 <% end %>
+                session required  pam_permit.so
+                session optional  pam_umask.so
+                session required  pam_unix.so
+                session optional  pam_sss.so
+                session optional  pam_ecryptfs.so unwrap
+

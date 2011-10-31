@@ -1,0 +1,11 @@
+[domain/<%= title %>]
+id_provider             = ldap
+auth_provider           = ldap
+ldap_schema             = <%= ldap_schema %>
+ldap_uri                = <%= ldap_uri %>
+ldap_search_base        = <%= ldap_search_base %>
+ldap_group_search_base  = <%= ldap_group_search_base %>
+ldap_tls_reqcert        = demand
+ldap_tls_cacert         = <%= scope.lookupvar("ssl::variables::ssl_certs") %>/cert_<%= ssl_ca %>.pem
+cache_credentials       = true
+enumerate               = true
