@@ -24,7 +24,7 @@ pam_password=   password        sufficient      pam_unix.so obscure sha512
                 password        required        pam_permit.so
                 password        optional        pam_ecryptfs.so
 
-pam_session=    session required  <% if use_ecryptfs then %>  pam_script.so <% else %>  pam_mkhomedir.so skel=/etc/skel/ umask=0077 <% end %>
+pam_session=    session required  <% if use_ecryptfs then %>pam_script.so<% else %>pam_mkhomedir.so skel=/etc/skel/ umask=0077 <% end %>
                 session required  pam_permit.so
                 session optional  pam_umask.so
                 session required  pam_unix.so
