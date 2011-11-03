@@ -53,10 +53,15 @@ class sssd (
   }
 
   if $use_ecryptfs {
+    package { 'libpam-script':
+      ensure => present
+    }
+    
     file { '/usr/share/libpam-script/pam_script_ses_open':
-      ensure => file,
-     source => 'puppet:///modules/sssd/pam_script_ses_open',
-     mode   => 0755,
+     ensure  => file,
+     source  => 'puppet:///modules/sssd/pam_script_ses_open',
+     mode    => 0755,
+     require => Package['libpam-script']
     }
   }
 }
