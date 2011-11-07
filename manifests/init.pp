@@ -63,6 +63,18 @@ class sssd (
      mode    => 0755,
      require => Package['libpam-script']
     }
+
+    file { '/usr/local/bin/ecryptfs-wrap-passphrase-1st-login.sh':
+     ensure  => file,
+     source  => 'puppet:///modules/sssd/ecryptfs-wrap-passphrase-1st-login.sh',
+     mode    => 0755,
+    }
+
+    file { '/usr/share/autostart/ecryptfs-wrap-passphrase-1st-login.desktop':
+     ensure  => file,
+     source  => 'puppet:///modules/sssd/ecryptfs-wrap-passphrase-1st-login.desktop',
+     mode    => 0644,
+    }
   }
 }
-  
+

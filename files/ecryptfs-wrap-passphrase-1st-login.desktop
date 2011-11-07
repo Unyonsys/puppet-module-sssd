@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Exec=ecryptfs-wrap-passphrase-1st-login.sh
+Name=Ecryptfs Passphrase Wrapper
+
