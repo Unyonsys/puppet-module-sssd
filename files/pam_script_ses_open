@@ -3,5 +3,5 @@ if [ ! -d /home/.ecryptfs/$PAM_USER ]
 then
   mkdir -p /home/users/$PAM_USER
   chown $PAM_USER /home/users/$PAM_USER
-  ecryptfs-setup-private -u $PAM_USER -b
+  ecryptfs-setup-private -n -u $PAM_USER -b
 fi
