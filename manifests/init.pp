@@ -1,6 +1,6 @@
 class sssd (
   $domains,
-  $local_groups = [ 'adm', 'dialout', 'cdrom', 'plugdev', 'lpadmin', 'sambashare' ],
+  $local_groups = [ 'adm', 'dialout', 'cdrom', 'plugdev', 'lpadmin', 'sambashare', 'libvirtd' ],
   $use_ecryptfs = false
   ) {
   include ssl::variables
