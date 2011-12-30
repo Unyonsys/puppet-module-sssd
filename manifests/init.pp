@@ -21,7 +21,7 @@ class sssd (
 
   concat { '/etc/sssd/sssd.conf':
     warn    => true,
-    mode    => 0600,
+    mode    => '0600',
     require => Package['sssd'],
     notify  => Service['sssd'],
   }
@@ -58,22 +58,22 @@ class sssd (
     }
 
     file { '/usr/share/libpam-script/pam_script_ses_open':
-     ensure  => file,
-     source  => 'puppet:///modules/sssd/pam_script_ses_open',
-     mode    => 0755,
-     require => Package['libpam-script']
+      ensure  => file,
+      source  => 'puppet:///modules/sssd/pam_script_ses_open',
+      mode    => '0755',
+      require => Package['libpam-script']
     }
 
     file { '/usr/local/bin/ecryptfs-wrap-passphrase-1st-login.sh':
-     ensure  => file,
-     source  => 'puppet:///modules/sssd/ecryptfs-wrap-passphrase-1st-login.sh',
-     mode    => 0755,
+      ensure  => file,
+      source  => 'puppet:///modules/sssd/ecryptfs-wrap-passphrase-1st-login.sh',
+      mode    => '0755',
     }
 
     file { '/usr/share/autostart/ecryptfs-wrap-passphrase-1st-login.desktop':
-     ensure  => file,
-     source  => 'puppet:///modules/sssd/ecryptfs-wrap-passphrase-1st-login.desktop',
-     mode    => 0644,
+      ensure  => file,
+      source  => 'puppet:///modules/sssd/ecryptfs-wrap-passphrase-1st-login.desktop',
+      mode    => '0644',
     }
   }
 }

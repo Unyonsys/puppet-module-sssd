@@ -13,7 +13,7 @@ define sssd::domain (
   }
 
   if $tls_ca {
-    $tlscacertificatefile = "${ssl::variables::ssl_certs}/cert_${tls_ca}.crt"
+    $tlscacertificatefile = "${ssl::variables::ssl_certs}/cert_${tls_ca}.pem"
     Ssl::Cert[$tls_ca] -> Domain[ $name ]
   }
   elsif $tls_chain {
