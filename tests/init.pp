@@ -2,7 +2,7 @@
     domains      => ['example'],
     use_ecryptfs => true
   }
-  
+
   sssd::domain { 'example':
     ssl_ca                  => 'example',
     ldap_uri                => 'ldap://server.example.com',

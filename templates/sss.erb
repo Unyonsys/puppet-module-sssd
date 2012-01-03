@@ -10,7 +10,7 @@ pam_auth=       auth    [success=2 default=ignore]  pam_unix.so nullok_secure tr
                 auth    requisite                   pam_succeed_if.so uid >= 500 quiet
                 auth    required                    pam_group.so
                 auth    required                    pam_permit.so
-                auth    optional                    pam_ecryptfs.so unwrap
+<% if use_ecryptfs then %>auth    optional                    pam_ecryptfs.so unwrap<% end %>
 
 pam_account=    account required                                        pam_unix.so
                 account sufficient                                      pam_localuser.so #avoid sssd log message for local users
@@ -19,15 +19,14 @@ pam_account=    account required                                        pam_unix
                 account required                                        pam_permit.so
 
 pam_password=   password        sufficient      pam_unix.so obscure sha512
-                password        sufficient      pam_sss.so use_authtok
+                password        sufficient      pam_sss.so
                 password        requisite       pam_deny.so
                 password        required        pam_permit.so
-                password        optional        pam_ecryptfs.so
+<% if use_ecryptfs then %>password        optional        pam_ecryptfs.so<% end %>
 
 pam_session=    session required  <% if use_ecryptfs then %>pam_script.so<% else %>pam_mkhomedir.so skel=/etc/skel/ umask=0077 <% end %>
                 session required  pam_permit.so
                 session optional  pam_umask.so
                 session required  pam_unix.so
                 session optional  pam_sss.so
-                session optional  pam_ecryptfs.so unwrap
-
+<% if use_ecryptfs then %>                session optional  pam_ecryptfs.so unwrap<% end %>
