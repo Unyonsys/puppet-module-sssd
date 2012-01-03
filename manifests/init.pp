@@ -4,7 +4,7 @@ class sssd (
   $use_ecryptfs = false
   ) {
   include ssl::variables
-  
+
   #Natty ssd package is not working
   if $::lsbdistcodename == 'natty' {
     Class['apt::repository::ppa::fabricesp::experimental'] -> Package['sssd']
