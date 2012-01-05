@@ -2,10 +2,11 @@ define sssd::domain (
   $ldap_uri,
   $ldap_search_base,
   $ldap_group_search_base,
-  $ldap_schema  = 'rfc2307',
-  $tls_ca       = false,
-  $tls_chain    = false,
-  ) {
+  $ldap_schema            = 'rfc2307',
+  $ldap_id_use_start_tls  = true,
+  $tls_ca                 = false,
+  $tls_chain              = false,
+) {
   include ssl::variables
 
   if ! ( $tls_ca ) and ! ( $tls_chain ) {
