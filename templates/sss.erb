@@ -28,5 +28,5 @@ pam_session=    session required  <% if use_ecryptfs then %>pam_script.so<% else
                 session required  pam_permit.so
                 session optional  pam_umask.so
                 session required  pam_unix.so
-                session optional  pam_sss.so
+                session sufficient [default=ignore] pam_sss.so
 <% if use_ecryptfs then %>                session optional  pam_ecryptfs.so unwrap<% end %>
