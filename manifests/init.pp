@@ -1,7 +1,10 @@
 class sssd (
   $domains,
   $local_groups = $sssd::variables::local_groups,
-  $use_ecryptfs = false
+  $use_ecryptfs = false,
+  $tls_domain = false,
+  $tls_ca_file = false,
+  $tls_chain_file = false
 ) inherits sssd::variables {
 
   validate_array( $domains, $local_groups ) 
